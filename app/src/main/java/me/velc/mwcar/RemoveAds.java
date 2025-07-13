@@ -1,6 +1,9 @@
 package me.velc.mwcar;
 
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
+import static de.robv.android.xposed.XposedHelpers.setObjectField;
+import static me.velc.mwcar.Constants.TARGET_NAME;
 
 import android.text.TextUtils;
 
@@ -14,24 +17,20 @@ import java.util.Map;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
-public class Hook implements IXposedHookLoadPackage {
-
-	private static final String APP_PACKAGE_NAME = "com.mfashiongallery.emag";
+public class RemoveAds implements IXposedHookLoadPackage {
 
 	@Override
 	public void handleLoadPackage(LoadPackageParam lpparam) {
-		if (APP_PACKAGE_NAME.equals(lpparam.packageName)) {
-			interceptResponse(".network.GsonRequest", lpparam.classLoader);
-			interceptResponse(".network.VolleyGsonRequest", lpparam.classLoader);
-		}
+		if (!TARGET_NAME.equals(lpparam.packageName)) return;
+		interceptResponse("GsonRequest", lpparam.classLoader);
+		interceptResponse("VolleyGsonRequest", lpparam.classLoader);
 	}
 
 	static void interceptResponse(String className, ClassLoader classLoader) {
-		XposedHelpers.findAndHookMethod(
-				APP_PACKAGE_NAME + className,
+		findAndHookMethod(
+				TARGET_NAME + ".network." + className,
 				classLoader,
 				"parseNetworkResponse",
 				"com.android.volley.NetworkResponse",
@@ -64,7 +63,7 @@ public class Hook implements IXposedHookLoadPackage {
 
 		if (removeAds(itemsElement.getAsJsonArray())) {
 			byte[] data = rootElement.toString().getBytes(origCharset);
-			XposedHelpers.setObjectField(param.args[0], "data", data);
+			setObjectField(param.args[0], "data", data);
 		}
 	}
 
@@ -97,7 +96,7 @@ public class Hook implements IXposedHookLoadPackage {
 
 				for (int i = 1; i < params.length; ++i) {
 					var pair = params[i].trim().split("=", 0);
-					if (pair.length == 2 && pair[0].equals("charset")) {
+					if (pair.length == 2 && "charset".equals(pair[0])) {
 						return pair[1];
 					}
 				}
