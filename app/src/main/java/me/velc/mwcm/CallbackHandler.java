@@ -1,4 +1,4 @@
-package me.velc.mwcar;
+package me.velc.mwcm;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

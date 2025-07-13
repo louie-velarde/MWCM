@@ -1,9 +1,9 @@
-package me.velc.mwcar;
+package me.velc.mwcm;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setObjectField;
-import static me.velc.mwcar.Constants.TARGET_NAME;
+import static me.velc.mwcm.Constants.TARGET_NAME;
 
 import android.text.TextUtils;
 

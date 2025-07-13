@@ -1,4 +1,4 @@
-package me.velc.mwcar;
+package me.velc.mwcm;
 
 final class Constants {
 

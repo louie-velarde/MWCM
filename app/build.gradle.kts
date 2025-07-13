@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "me.velc.mwcar"
+    namespace = "me.velc.mwcm"
     compileSdk = 36
 
     defaultConfig {
@@ -13,7 +13,7 @@ android {
         versionCode = 4
         versionName = "1.1.0"
 
-        base.archivesName = "MWCAR-$versionName"
+        base.archivesName = "MWCM-$versionName"
     }
 
     buildTypes {

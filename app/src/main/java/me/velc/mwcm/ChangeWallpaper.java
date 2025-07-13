@@ -1,4 +1,4 @@
-package me.velc.mwcar;
+package me.velc.mwcm;
 
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
@@ -8,8 +8,9 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.getStaticIntField;
 import static de.robv.android.xposed.XposedHelpers.getStaticObjectField;
 import static de.robv.android.xposed.XposedHelpers.newInstance;
-import static me.velc.mwcar.Constants.TARGET_NAME;
+import static me.velc.mwcm.Constants.TARGET_NAME;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
@@ -91,6 +92,7 @@ public class ChangeWallpaper implements IXposedHookLoadPackage {
 				@Override
 				protected Object handleCallback(Object proxy, Method method, Object[] args) {
 					if ((Boolean) args[0]) {
+						@SuppressLint("DiscouragedApi")
 						int resId = ctx.getResources().getIdentifier(
 								"lks_subscription_toast", "string", TARGET_NAME);
 						Toast.makeText(ctx, resId, Toast.LENGTH_SHORT).show();

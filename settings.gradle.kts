@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MWCAR"
+rootProject.name = "MWCM"
 include(":app")
  
