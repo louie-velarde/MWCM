@@ -20,12 +20,12 @@ import java.lang.reflect.Proxy;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 public class ChangeWallpaper implements IXposedHookLoadPackage {
 
 	@Override
-	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
+	public void handleLoadPackage(LoadPackageParam lpparam) {
 		if (!TARGET_NAME.equals(lpparam.packageName)) return;
 		interceptUncheck("ProviderEnableSwitcherClickAction",
 		                 lpparam.classLoader,
