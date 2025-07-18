@@ -10,7 +10,7 @@ android {
         applicationId = "me.velc.mwcar"
         minSdk = 19
         targetSdk = 36
-        versionCode = 4
+        versionCode = 6
         versionName = "1.1.0"
 
         base.archivesName = "MWCM-$versionName"
