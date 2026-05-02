@@ -4,12 +4,15 @@ plugins {
 
 android {
     namespace = "me.velc.mwcm"
-    compileSdk = 36
+    compileSdk {
+        version = release(36) {
+            minorApiLevel = 1
+        }
+    }
 
     defaultConfig {
         applicationId = "me.velc.mwcar"
         minSdk = 19
-        targetSdk = 36
         versionCode = 6
         versionName = "1.1.0"
 
