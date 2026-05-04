@@ -13,8 +13,8 @@ android {
     defaultConfig {
         applicationId = "me.velc.mwcar"
         minSdk = 19
-        versionCode = 6
-        versionName = "1.1.0"
+        versionCode = 7
+        versionName = "1.1.1"
 
         base.archivesName = "MWCM-$versionName"
     }

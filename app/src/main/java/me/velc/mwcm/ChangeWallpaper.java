@@ -27,15 +27,15 @@ public class ChangeWallpaper implements IXposedHookLoadPackage {
 	@Override
 	public void handleLoadPackage(LoadPackageParam lpparam) {
 		if (!TARGET_NAME.equals(lpparam.packageName)) return;
-		interceptUncheck("ProviderEnableSwitcherClickAction",
-		                 lpparam.classLoader,
-		                 "WALLPAPER_SOURCE_TYPE_LOCKSCREEN");
-		interceptUncheck("DesktopProviderEnableSwitcherClickAction",
-		                 lpparam.classLoader,
-		                 "WALLPAPER_SOURCE_TYPE_DESKTOP");
+		interceptClick("ProviderEnableSwitcherClickAction",
+		               lpparam.classLoader,
+		               "WALLPAPER_SOURCE_TYPE_LOCKSCREEN");
+		interceptClick("DesktopProviderEnableSwitcherClickAction",
+		               lpparam.classLoader,
+		               "WALLPAPER_SOURCE_TYPE_DESKTOP");
 	}
 
-	static void interceptUncheck(String cName, ClassLoader cLoader, String sourceFieldName) {
+	static void interceptClick(String cName, ClassLoader cLoader, String sourceFieldName) {
 		findAndHookMethod(
 				TARGET_NAME + ".ssetting.clickaction." + cName,
 				cLoader,
